@@ -1,1 +1,1 @@
-g++ get_opticalflow.cpp `pkg-config --cflags opencv` `pkg-config --libs opencv`
+g++ get_opticalflow_fromFrame.cpp `pkg-config --cflags opencv` `pkg-config --libs opencv`

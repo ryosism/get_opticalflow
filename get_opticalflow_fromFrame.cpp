@@ -8,6 +8,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <iomanip>
+#include <sys/stat.h>
 
 using namespace std;
 using namespace cv;
@@ -17,23 +18,24 @@ int main()
 {
         // TV-L1アルゴリズムによるオプティカルフロー計算オブジェクトの生成
         Ptr<DenseOpticalFlowExt> opticalFlow = superres::createOptFlow_DualTVL1();
-
+	
+	mkdir("./../opticalFlow/0004",0775);	
         int frame = 1;
         while (1)
         {
             waitKey(1000);
             std::stringstream prevFilename;
-            prevFilename << "0002/" << frame << ".jpg";
+            prevFilename << "../dataset/YouCook/VideoFrames/" << "0004/" << frame << ".jpg";
             std::string prevfn = prevFilename.str();
             Mat prev = cv::imread(prevfn.c_str());
-            cv::imshow("prevFrame", prev);
+//            cv::imshow("prevFrame", prev);
             printf("prev = %s\n", prevfn.c_str());
 
             std::stringstream currFilename;
-            currFilename << "0002/" << frame+2 << ".jpg";
+            currFilename << "../dataset/YouCook/VideoFrames/" << "0004/" << frame+2 << ".jpg";
             std::string currfn = currFilename.str();
             Mat curr = cv::imread(currfn.c_str());
-            cv::imshow("currFrame", curr);
+//            cv::imshow("currFrame", curr);
             printf("curr = %s\n", currfn.c_str());
 
             // オプティカルフローの計算
@@ -63,9 +65,9 @@ int main()
             cvtColor(hsv, flowBgr, cv::COLOR_HSV2BGR);
 
             // 表示
-            cv::imshow("optical flow", flowBgr);
+//            cv::imshow("optical flow", flowBgr);
 	        std::stringstream ss;
-            ss << setfill('0') << setw(5) << right << frame << ".jpg";
+            ss << "./../opticalFlow/0004/" << setfill('0') << setw(5) << right << frame << ".jpg";
             std::string fn = ss.str();
             flowBgr.convertTo(flowBgr, CV_8U, 255);
        	    printf("%s\n",fn.c_str());
