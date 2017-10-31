@@ -15,26 +15,38 @@ using namespace std;
 using namespace cv;
 using namespace cv::superres;
 
-int main()
+int main(int argc, char *argv[])
 {
     printf("GPU使える？%d\n",cv::gpu::getCudaEnabledDeviceCount());
         // TV-L1アルゴリズムによるオプティカルフロー計算オブジェクトの生成
         Ptr<DenseOpticalFlowExt> opticalFlow = superres::createOptFlow_DualTVL1();
 
+<<<<<<< HEAD
+	mkdir("./../opticalFlow/0007",0775);	
+=======
 	    mkdir("./../opticalFlow/0005",0775);
+>>>>>>> a9f4137dec8a43e0b230395d5dcfc40ae6d764fe
         int frame = 1;
         while (1)
         {
             waitKey(1000);
             std::stringstream prevFilename;
+<<<<<<< HEAD
+            prevFilename << "../dataset/YouCook/VideoFrames/" << "0007/" << setfill('0') << setw(5) << right << frame << ".jpg";
+=======
             prevFilename << "../dataset/YouCook/VideoFrames/" << "0005/" << setfill('0') << setw(5) << right << frame << ".jpg";
+>>>>>>> a9f4137dec8a43e0b230395d5dcfc40ae6d764fe
             std::string prevfn = prevFilename.str();
             cv::cuda::GpuMat prev = cv::imread(prevfn.c_str());
 //            cv::imshow("prevFrame", prev);
             printf("prev = %s\n", prevfn.c_str());
 
             std::stringstream currFilename;
+<<<<<<< HEAD
+            currFilename << "../dataset/YouCook/VideoFrames/" << "0007/" << setfill('0') << setw(5) << right << frame+2 << ".jpg";
+=======
             currFilename << "../dataset/YouCook/VideoFrames/" << "0005/" << setfill('0') << setw(5) << right << frame+2 << ".jpg";
+>>>>>>> a9f4137dec8a43e0b230395d5dcfc40ae6d764fe
             std::string currfn = currFilename.str();
             cv::cuda::GpuMat curr = cv::imread(currfn.c_str());
 //            cv::imshow("currFrame", curr);
@@ -69,7 +81,11 @@ int main()
             // 表示
 //            cv::imshow("optical flow", flowBgr);
 	        std::stringstream ss;
+<<<<<<< HEAD
+            ss << "./../opticalFlow/0007/" << setfill('0') << setw(5) << right << frame << ".jpg";
+=======
             ss << "./../opticalFlow/0005/" << setfill('0') << setw(5) << right << frame << ".jpg";
+>>>>>>> a9f4137dec8a43e0b230395d5dcfc40ae6d764fe
             std::string fn = ss.str();
             flowBgr.convertTo(flowBgr, CV_8U, 255);
        	    printf("%s\n",fn.c_str());
